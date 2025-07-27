@@ -1,0 +1,38 @@
+﻿﻿
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h4>@Model.Name</h4>
+<h4>@Model.UName</h4>
+<h4>@Model.Id</h4>
+<h4>@Model.Date</h4>
+<h4>@Model.Email</h4>
+
+@Html.ValidationSummary()
+
+@*<h4>@Request["Name"]</h4>
+    <h4>@Request["Id"]</h4>
+    <h4>@Request["Email"]</h4>
+    <h4>@Request["Address"]</h4>*@
+@*<h4>@ViewBag.Name</h4>
+    <h4>@ViewBag.Id</h4>
+    <h4>@ViewBag.Email</h4>
+    <h4>@ViewBag.Address</h4>*@
+
+<h2>Create</h2>
+<form method="post">
+    <input type="text" class="form-control" value="@Model.Name" placeholder="Name" name="Name" />
+    <span class="text-danger">@Html.ValidationMessage("Name")</span>
+   <input type="text" class="form-control" value="@Model.UName" placeholder="Username" name="UName" />
+    <span class="text-danger">@Html.ValidationMessage("UName")</span>
+    <input type="text" class="form-control" value="@Model.Id" placeholder="Id" name="Id" />
+    <span class="text-danger">@Html.ValidationMessage("Id")</span>
+    <input type="date" class="form-control" value="@Model.Date" placeholder="date" name="Date" />
+    <span class="text-danger">@Html.ValidationMessage("Date")</span>
+    <input type="text" class="form-control" value="@Model.Email" placeholder="Email" name="Email" />
+    <span class="text-danger">@Html.ValidationMessage("Email")</span>
+    
+    <input type="submit" class="btn btn-primary" value="Create" />
+</form>
