@@ -24,7 +24,6 @@ namespace fromvalidation.Models
                         {
                             return new ValidationResult("Email must start with the f ID.");
                         }
-                    
                 }
             }
 
