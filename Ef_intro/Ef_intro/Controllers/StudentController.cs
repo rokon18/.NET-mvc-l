@@ -30,6 +30,7 @@ namespace IntroEF.Controllers
         }
         public ActionResult Details(int id)
         {
+
             var st = db.Students.Find(id);
             return View(st);
         }
