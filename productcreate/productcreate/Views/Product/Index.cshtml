@@ -1,0 +1,39 @@
+﻿﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<a href="/product/create">add product</a>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+
+        <th>Price</th>
+        <th>Qantity</th>
+        <th>Description</th>
+        <th>Modify</th>
+        
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+
+            <td>@item.Price</td>
+            <td>@item.QTy</td>
+            <td>@item.Description</td>
+            <td>
+                <a href="/product/Delete/@item.Id">Delete item</a>
+                <a href="/product/Edit/@item.Id">Edit item</a>
+            </td>
+             
+            
+
+        </tr>
+    }
+</table>
+<a href="product/restock"><btn>see restock item</btn></a>

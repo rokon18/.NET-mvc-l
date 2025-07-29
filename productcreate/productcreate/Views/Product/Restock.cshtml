@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Restock";
+}
+
+<h2>Restock</h2>
+<a href="/product/create">add product</a>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+
+        <th>Price</th>
+        <th>Qantity</th>
+        <th>Description</th>
+        
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Name</td>
+
+            <td>@item.Price</td>
+            <td>@item.QTy</td>
+            <td>@item.Description</td>
+            </tr>
+    }
+            </table>
