@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>My Requests</h2>
+<a href="/Restaurant/Create"> New Request</a>
+<table class="table table-bordered">
+    <tr>
+        <th>Food</th>
+        <th>Preserve Until</th>
+        <th>Status</th>
+    </tr>
+    @if (Model != null)
+    {
+    foreach (var r in Model)
+    {
+        <tr>
+            <td>@r.Food/td>
+            <td>@r.Preserveuntil</td>
+            <td>@r.Status.StatusName</td>
+        </tr>
+    }
+    }
+
+</table>
