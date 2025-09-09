@@ -72,19 +72,19 @@ namespace api_intro.Controllers
             }
 
         }
-        [HttpPost]
-        [Route("edit")]
-        public HttpResponseMessage edit(DepartmentDTO s)
+        [HttpPut]
+        [Route("edit/{id}")]
+        public HttpResponseMessage edit(int id, DepartmentDTO s)
         {
-            var dept = GetMapper().Map<Department>(s);
+            
             try
             {
-                var d = db.Departments.Find(dept.Id);
+                var d = db.Departments.Find(id);
                 if (d != null)
                 {
-                    d.DeptName = dept.DeptName;
+                    d.DeptName = s.DeptName;
                     db.SaveChanges();
-                    return Request.CreateResponse(HttpStatusCode.OK, d);
+                    return Request.CreateResponse(HttpStatusCode.OK, s);
                 }
                 else
                 {
@@ -97,7 +97,7 @@ namespace api_intro.Controllers
             }
         }
         [HttpDelete]
-        [Route("{id}")]
+        [Route("delete/{id}")]
         public HttpResponseMessage delete(int id)
         {
             try
@@ -121,7 +121,7 @@ namespace api_intro.Controllers
         }
         [HttpGet]
         [Route("withstudents")]
-        public HttpResponseMessage GetDepartmentStudents()
+        public HttpResponseMessage Department_stu()
         {
             try
             {
@@ -140,7 +140,9 @@ namespace api_intro.Controllers
         {
             try
             {
-                var department = db.Departments.Include("Students").SingleOrDefault(d => d.Id == id);
+                var department = (from d in db.Departments.Include("Students")
+                                  where d.Id == id
+                                  select d).SingleOrDefault();
                 if (department != null)
                 {
                     var result = GetMapper().Map<DepartmentStudentDTO>(department);

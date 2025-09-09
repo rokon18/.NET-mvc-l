@@ -70,21 +70,21 @@ namespace api_intro.Controllers
             }
 
         }
-        [HttpPost]
-        [Route("edit")]
-        public HttpResponseMessage edit(StudentDTO s)
+        [HttpPut]
+        [Route("edit/{id}")]
+        public HttpResponseMessage edit(int id, StudentDTO s)
         {
-            var st = GetMapper().Map<StudentDeptDTO>(s);
+            
             try
             {
-                var data = db.Students.Find(st.Id);
+                var data = db.Students.Find(id);
                 if (data != null)
                 {
-                    data.Name = st.Name;
-                    data.Cgpa = st.Cgpa;
-                    data.D_Id = st.D_Id;
+                    data.Name = s.Name;
+                    data.Cgpa = s.Cgpa;
+                    data.D_Id = s.D_Id;
                     db.SaveChanges();
-                    return Request.CreateResponse(HttpStatusCode.OK, data);
+                    return Request.CreateResponse(HttpStatusCode.OK, s);
                 }
                 else
                 {
@@ -97,7 +97,7 @@ namespace api_intro.Controllers
             }
         }
         [HttpDelete]
-        [Route("{id}")]
+        [Route("delete/{id}")]
         public HttpResponseMessage remove(int id)
         {
             try
