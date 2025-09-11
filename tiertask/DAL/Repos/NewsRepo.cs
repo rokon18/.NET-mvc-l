@@ -31,17 +31,25 @@ namespace DAL.Repos
 
         public News Get(DateTime date, Category cname)
         {
-            throw new NotImplementedException();
+            var news = (from n in db.Newses
+                            where n.Date == date && n.ctg.Id == cname.Id
+                            select n).FirstOrDefault();
+            return news;
+
         }
 
         public News Get(Category cname)
         {
-            throw new NotImplementedException();
+            return (from n in db.Newses
+                    where n.ctg.Id == cname.Id
+                    select n).FirstOrDefault();
+
         }
 
         public News Get(DateTime date)
         {
-            throw new NotImplementedException();
+            
+            return db.Newses.Find(date);
         }
         public bool Delete(int id)
         {

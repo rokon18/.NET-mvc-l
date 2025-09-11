@@ -1,4 +1,5 @@
 ﻿using BLL;
+using BLL.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,62 @@ namespace application.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No News Found");
 
             }
-            
+            [HttpGet]
+            [Route("bydate/{date}")]
+            public HttpResponseMessage Get(DateTime date)
+            {
+                var data = new NewsService().Get(date);
+                if (data != null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, data);
+                }
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No News Found");
+            }
+            [HttpGet]
+            [Route("bydate/{date}/bycategory/{cname}")]
+            public HttpResponseMessage Get(DateTime date, string cname)
+            {
+                var data = new NewsService().Get(date,  new CategoryDTO { Name = cname });
+                if (data != null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, data);
+                }
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No News Found");
+            }
+            [HttpGet]
+            [Route("bycategory/{cname}")]
+            public HttpResponseMessage Get(string cname)
+            {
+                var data = new NewsService().Get(new CategoryDTO { Name = cname });
+                if (data != null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, data);
+                }
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No News Found");
+            }
+            [HttpDelete]
+            [Route("delete/{id}")]
+            public HttpResponseMessage Delete(int id)
+            {
+                var data = new NewsService().Delete(id);
+                if (data)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, "News Deleted");
+                }
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No News Found");
+            }
+            [HttpGet]
+            [Route("update")]
+            public HttpResponseMessage Update(NewsDTO n)
+            {
+                var data = new NewsService().Update(n);
+                if (data)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, "News Updated");
+                }
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No News Found");
+            }
+
         }
     }
 }

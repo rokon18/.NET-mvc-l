@@ -33,7 +33,33 @@ namespace BLL
             var data = DataAccessFactory.NewsData().Get(id);
             return GetMapper().Map<NewsDTO>(data);
         }
+        public NewsDTO Get(DateTime date)
+        {
+            var data = DataAccessFactory.NewsData().Get(date);
+            return GetMapper().Map<NewsDTO>(data);
+        }
+        public NewsDTO Get(DateTime date, CategoryDTO cname)
+        {
+            var data = DataAccessFactory.NewsData().Get(date, GetMapper().Map<Category>(cname));
+            return GetMapper().Map<NewsDTO>(data);
+        }
+        public NewsDTO Get(CategoryDTO cname)
+        {
+            var data = DataAccessFactory.NewsData().Get(GetMapper().Map<Category>(cname));
+            return GetMapper().Map<NewsDTO>(data);
+        }
 
-        
+        public bool Update(NewsDTO n)
+        {
+            var data = GetMapper().Map<News>(n);
+            return DataAccessFactory.NewsData().Update(data);
+        }
+        public bool Delete(int id)
+        {
+            return DataAccessFactory.NewsData().Delete(id);
+        }
+
+
+
     }
 }
